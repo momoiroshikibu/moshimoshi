@@ -1,9 +1,7 @@
 <!doctype html>
-
 <html ng-app="moshimoshiApp">
-
   <head>
-
+    <title>moshimoshi</title>
   </head>
   <body>
     <h1>moshimoshi</h1>
@@ -13,8 +11,7 @@
       <div>
         <input type="text"
                ng-model="userName"
-               placeholder="Your Name"
-               >
+               placeholder="Your Name">
       </div>
 
       <h3>Messages</h3>
@@ -23,18 +20,17 @@
         <span>{{message.time | date:'HH:mm:ss'}}</span>
         <span>{{message.message}}</span>
       </div>
-      
-      <input type="text" ng-model="message">
-      <button type="button"
-              ng-click="emit()"
-              >emit event</button>
+
+      <form ng-submit="sendMessage()">
+        <input type="text" ng-model="message">
+      </form>
     </div>
 
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="/angular/angular.js"></script>
     <script src="/angular-socket-io/socket.js"></script>
     <script src="/javascripts/moshimoshi.js"></script>
-    
+
   </body>
 </html>

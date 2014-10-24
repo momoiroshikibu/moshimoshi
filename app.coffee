@@ -25,16 +25,17 @@ app.set 'view engine', 'ejs'
 
 ## assets
 # coffee
+public_dir = path.join __dirname, 'public'
 app.use coffeeScript
-  src: "#{__dirname}/public"
+  src: public_dir
   bare: true
 
 # stylus
 app.use stylus.middleware
-  src: "#{__dirname}/public"
+  src: public_dir
 
 # application assets
-app.use express.static(path.join __dirname, 'public')
+app.use express.static(public_dir)
 
 # vendor assets
 app.use express.static(path.join __dirname, 'bower_components')
@@ -48,12 +49,10 @@ app.get '/', (req, res) ->
 io.on 'connection', (socket) ->
 
   socket.on 'newMessage', (data) ->
-    console.log data
-    
-    socket.emit 'updateMessages',
+    io.sockets.emit 'updateMessages',
       userName: data.userName
-      message: data.message
-      time:    Date.now()
+      message:  data.message
+      time:     Date.now()
 
 
 # run server

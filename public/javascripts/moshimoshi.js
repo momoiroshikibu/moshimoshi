@@ -10,11 +10,12 @@ angular.module('moshimoshiApp', ['btford.socket-io']).factory('webSocket', funct
   $scope.messages = messages = [];
   webSocket.on('updateMessages', function(message) {
     console.log('updateMessages');
-    console.log(message);
     return messages.push(message);
   });
-  return $scope.emit = function() {
-    console.log('emit');
+  return $scope.sendMessage = function() {
+    if (!$scope.message) {
+      return;
+    }
     webSocket.emit('newMessage', {
       userName: $scope.userName,
       message: $scope.message
