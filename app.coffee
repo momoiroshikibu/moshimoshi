@@ -1,4 +1,5 @@
 ## requirements
+config       = require 'config'
 express      = require 'express'
 path         = require 'path'
 favicon      = require 'serve-favicon'
@@ -10,12 +11,11 @@ bodyParser   = require 'body-parser'
 http         = require 'http'
 socketio     = require 'socket.io'
 request      = require 'request'
-# request.defaults
-#   headers:
-#     'Content-Type': 'application/json'
-requestOptions =
-  url: 'http://localhost:9200/moshimoshi/messages/'
-  json: true
+
+
+## configurations
+elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
+
 
 # server settings
 app    = express()
@@ -64,10 +64,8 @@ io.on 'connection', (socket) ->
     io.sockets.emit 'updateMessages',
       newMessage
 
-    console.log "http://localhost:9200/moshimoshi/#{newMessage.time}"
-
     options =
-      uri: "http://localhost:9200/moshimoshi/#{newMessage.time}"
+      uri: "#{elasticSearchBaseUrl}/moshimoshi/#{newMessage.time}"
       method: 'POST'
       json: newMessage
 
@@ -79,7 +77,7 @@ io.on 'connection', (socket) ->
     console.log 'searchMessages', query
 
     options =
-      uri: "http://localhost:9200/moshimoshi/_search"
+      uri: "#{elasticSearchBaseUrl}/moshimoshi/_search"
       method: 'GET'
       json:
         query:
