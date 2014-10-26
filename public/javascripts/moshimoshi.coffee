@@ -9,12 +9,11 @@ angular
     ioSocket: io.connect 'http://localhost:3000'
   )
 
-.controller 'moshimoshiController', ($scope, webSocket) ->
 
+.controller 'moshimoshiController', ($scope, webSocket) ->
   $scope.messages = messages = []
 
   webSocket.on 'updateMessages', (message) ->
-    console.log 'updateMessages'
     messages.push message
 
   $scope.sendMessage = ->
@@ -23,3 +22,15 @@ angular
       userName: $scope.userName
       message:  $scope.message
     $scope.message = null
+
+
+.controller 'messageSearchController', ($scope, webSocket) ->
+  $scope.messages = []
+
+  webSocket.on 'resultMessages', (resultMessages) ->
+    messages = resultMessages
+    $scope.messages = resultMessages
+
+  $scope.searchMessages = (query) ->
+    webSocket.emit 'searchMessages',
+      query: $scope.query

@@ -22,4 +22,18 @@ angular.module('moshimoshiApp', ['btford.socket-io']).factory('webSocket', funct
     });
     return $scope.message = null;
   };
+}).controller('messageSearchController', function($scope, webSocket) {
+  $scope.messages = [];
+  webSocket.on('resultMessages', function(resultMessages) {
+    var messages;
+    console.log(resultMessages);
+    messages = resultMessages;
+    return $scope.messages = resultMessages;
+  });
+  return $scope.searchMessages = function(query) {
+    console.log(query);
+    return webSocket.emit('searchMessages', {
+      query: $scope.query
+    });
+  };
 });

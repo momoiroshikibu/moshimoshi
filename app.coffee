@@ -45,6 +45,7 @@ app.use express.static(public_dir)
 # vendor assets
 app.use express.static(path.join __dirname, 'bower_components')
 
+
 ## routings
 app.get '/', (req, res) ->
   res.render 'index'
@@ -72,6 +73,25 @@ io.on 'connection', (socket) ->
 
     request options, (error, response, body) ->
       console.log response, body
+
+
+  socket.on 'searchMessages', (query) ->
+    console.log 'searchMessages', query
+
+    options =
+      uri: "http://localhost:9200/moshimoshi/_search"
+      method: 'GET'
+      json:
+        query:
+          multi_match:
+            query: query.query
+            fields: ['message']
+
+    request options, (error, response, body) ->
+      socket.emit 'resultMessages', [] unless body.hits.hits
+      resultMessages = body.hits.hits.map (item, i) ->
+        item._source
+      socket.emit 'resultMessages', resultMessages
 
 
 # run server
