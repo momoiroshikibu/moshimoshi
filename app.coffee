@@ -42,8 +42,8 @@ app.use express.static(path.join __dirname, 'bower_components')
 
 
 ## routings
-app.get '/', (req, res) ->
-  res.render 'index'
+router = require './app/router'
+router app
 
 
 chatController = require './app/controllers/chat_controller'
