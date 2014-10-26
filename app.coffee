@@ -10,11 +10,6 @@ stylus       = require 'stylus'
 bodyParser   = require 'body-parser'
 http         = require 'http'
 socketio     = require 'socket.io'
-request      = require 'request'
-
-
-## configurations
-elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
 
 
 # server settings
@@ -51,46 +46,9 @@ app.get '/', (req, res) ->
   res.render 'index'
 
 
-## events
-io.on 'connection', (socket) ->
+chatController = require './app/controllers/chat_controller'
 
-  socket.on 'newMessage', (data) ->
-
-    newMessage =
-      userName: data.userName
-      message:  data.message
-      time:     Date.now()
-
-    io.sockets.emit 'updateMessages',
-      newMessage
-
-    options =
-      uri: "#{elasticSearchBaseUrl}/moshimoshi/#{newMessage.time}"
-      method: 'POST'
-      json: newMessage
-
-    request options, (error, response, body) ->
-      console.log response, body
-
-
-  socket.on 'searchMessages', (query) ->
-    console.log 'searchMessages', query
-
-    options =
-      uri: "#{elasticSearchBaseUrl}/moshimoshi/_search"
-      method: 'GET'
-      json:
-        query:
-          multi_match:
-            query: query.query
-            fields: ['message']
-
-    request options, (error, response, body) ->
-      socket.emit 'resultMessages', [] unless body.hits.hits
-      resultMessages = body.hits.hits.map (item, i) ->
-        item._source
-      socket.emit 'resultMessages', resultMessages
-
+chatController(io)
 
 # run server
 server.listen 3000
