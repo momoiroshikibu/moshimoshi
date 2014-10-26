@@ -6,42 +6,16 @@
   <body>
     <h1>moshimoshi</h1>
 
-    <div ng-controller="moshimoshiController">
+    <chat></chat>
 
-      <div>
-        <input type="text"
-               ng-model="userName"
-               placeholder="Your Name">
-      </div>
-
-      <h3>Messages</h3>
-      <div ng-repeat="message in messages">
-        <span>{{message.userName}}</span>
-        <span>{{message.time | date:'HH:mm:ss'}}</span>
-        <span>{{message.message}}</span>
-      </div>
-
-      <form ng-submit="sendMessage()">
-        <input type="text" ng-model="message">
-      </form>
-    </div>
-
-    <div ng-controller="messageSearchController">
-      <h3>Search</h3>
-      <form ng-submit="searchMessages(query)">
-        <input type="text" ng-model="query">
-        <div ng-repeat="message in messages">
-          <span>{{message.userName}}</span>
-          <span>{{message.time | date:'HH:mm:ss'}}</span>
-          <span>{{message.message}}</span>
-        </div>
-      </form>
-    </div>
-
+    <search></search>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/angular/angular.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
     <script src="/angular-socket-io/socket.js"></script>
+    <script src="/javascripts/directives/chat_directive.js"></script>
+    <script src="/javascripts/directives/search_directive.js"></script>
     <script src="/javascripts/moshimoshi.js"></script>
 
   </body>

@@ -1,36 +1,27 @@
 console.log 'moshimoshi'
 
-angular
+app = angular
 .module 'moshimoshiApp', [
+  'ngRoute'
+  'moshimoshi.chat_directive'
+  'moshimoshi.search_directive'
   'btford.socket-io'
 ]
-.factory 'webSocket', (socketFactory) ->
+
+
+# app.config ['$routeProvider', '$locationProvider', '$parseProvider', ($routeProvider, $locationProvider, $parseProvider) ->
+
+#   $routeProvider
+#     .when '/',
+#       templateUrl: '/templates/chat.html'
+# #      controller: 'ChatController'
+#     .when '/search',
+#       templateUrl: '/templates/search.html'
+# #      controller: 'SearchController'
+# ]
+
+app.factory 'webSocket', (socketFactory) ->
   socket = socketFactory(
     ioSocket: io.connect 'http://localhost:3000'
   )
 
-
-.controller 'moshimoshiController', ($scope, webSocket) ->
-  $scope.messages = messages = []
-
-  webSocket.on 'updateMessages', (message) ->
-    messages.push message
-
-  $scope.sendMessage = ->
-    return unless $scope.message
-    webSocket.emit 'newMessage',
-      userName: $scope.userName
-      message:  $scope.message
-    $scope.message = null
-
-
-.controller 'messageSearchController', ($scope, webSocket) ->
-  $scope.messages = []
-
-  webSocket.on 'resultMessages', (resultMessages) ->
-    messages = resultMessages
-    $scope.messages = resultMessages
-
-  $scope.searchMessages = (query) ->
-    webSocket.emit 'searchMessages',
-      query: $scope.query
