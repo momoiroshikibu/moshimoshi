@@ -1,6 +1,5 @@
 ## requirements
 express      = require 'express'
-request      = require 'request'
 path         = require 'path'
 favicon      = require 'serve-favicon'
 logger       = require 'morgan'
@@ -10,7 +9,13 @@ stylus       = require 'stylus'
 bodyParser   = require 'body-parser'
 http         = require 'http'
 socketio     = require 'socket.io'
-
+request      = require 'request'
+# request.defaults
+#   headers:
+#     'Content-Type': 'application/json'
+requestOptions =
+  url: 'http://localhost:9200/moshimoshi/messages/'
+  json: true
 
 # server settings
 app    = express()
@@ -49,10 +54,24 @@ app.get '/', (req, res) ->
 io.on 'connection', (socket) ->
 
   socket.on 'newMessage', (data) ->
-    io.sockets.emit 'updateMessages',
+
+    newMessage =
       userName: data.userName
       message:  data.message
       time:     Date.now()
+
+    io.sockets.emit 'updateMessages',
+      newMessage
+
+    console.log "http://localhost:9200/moshimoshi/#{newMessage.time}"
+
+    options =
+      uri: "http://localhost:9200/moshimoshi/#{newMessage.time}"
+      method: 'POST'
+      json: newMessage
+
+    request options, (error, response, body) ->
+      console.log response, body
 
 
 # run server
