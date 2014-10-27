@@ -1,8 +1,15 @@
 <div>
   <div>
-    <input type="text"
-           ng-model="userName"
-           placeholder="Your Name">
+    <form class="pure-form">
+      <fieldset>
+        <div class="pure-control-group">
+            <label for="userName">Username</label>
+            <input type="text"
+               ng-model="userName"
+               placeholder="Username">
+        </div>
+      </fieldset>
+    </form>
   </div>
 
   <h3>Messages</h3>
@@ -12,7 +19,7 @@
     <span>{{message.message}}</span>
   </div>
 
-  <form ng-submit="sendMessage()">
-    <input type="text" ng-model="message">
+  <form ng-submit="sendMessage()" class="pure-form">
+    <input type="text" ng-model="message" class="pure-input-2-3">
   </form>
 </div>
