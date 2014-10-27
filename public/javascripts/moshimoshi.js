@@ -7,6 +7,6 @@ app = angular.module('moshimoshiApp', ['ngRoute', 'moshimoshi.chat_directive', '
 app.factory('webSocket', function(socketFactory) {
   var socket;
   return socket = socketFactory({
-    ioSocket: io.connect('http://localhost:3000')
+    ioSocket: io.connect("http://" + window.location.host)
   });
 });

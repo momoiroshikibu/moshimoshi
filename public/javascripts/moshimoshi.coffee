@@ -22,6 +22,6 @@ app = angular
 
 app.factory 'webSocket', (socketFactory) ->
   socket = socketFactory(
-    ioSocket: io.connect 'http://localhost:3000'
+    ioSocket: io.connect "http://#{window.location.host}"
   )
 
