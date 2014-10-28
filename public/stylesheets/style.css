@@ -16,6 +16,29 @@ body {
   margin-left: -180px;
   z-index: 1;
 }
+.Sidebar .title {
+  color: #eee;
+  font-size: x-large;
+  text-align: center;
+}
+.Sidebar .Rooms {
+  margin: 0;
+  padding: 0;
+}
+.Sidebar .Rooms .Room {
+  display: block;
+  padding-left: 20px;
+  list-style: none;
+}
+.Sidebar .Rooms .Room a {
+  display: block;
+  padding: 10px 10px;
+  text-decoration: none;
+  color: #eee;
+}
+.Sidebar .Rooms .Room a:hover {
+  background-color: #ffc0cb;
+}
 .Main {
   padding: 10px;
 }

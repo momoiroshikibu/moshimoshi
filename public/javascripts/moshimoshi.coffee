@@ -3,6 +3,7 @@ console.log 'moshimoshi'
 app = angular
 .module 'moshimoshiApp', [
   'ngRoute'
+  'moshimoshi.sidebar_directive'
   'moshimoshi.chat_directive'
   'moshimoshi.search_directive'
   'btford.socket-io'
