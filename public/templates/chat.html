@@ -1,16 +1,4 @@
 <div>
-  <div>
-    <form class="pure-form">
-      <fieldset>
-        <div class="pure-control-group">
-            <input type="text"
-               ng-model="userName"
-               placeholder="Username">
-        </div>
-      </fieldset>
-    </form>
-  </div>
-
   <h3>Messages</h3>
   <div ng-repeat="message in messages">
     <span>{{message.userName}}</span>

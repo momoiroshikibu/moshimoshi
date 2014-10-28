@@ -21,23 +21,33 @@ body {
   font-size: x-large;
   text-align: center;
 }
-.Sidebar .Rooms {
+.Sidebar .ChatRooms .title {
+  font-size: medium;
+}
+.Sidebar .ChatRooms .Rooms {
   margin: 0;
   padding: 0;
 }
-.Sidebar .Rooms .Room {
+.Sidebar .ChatRooms .Rooms .Room {
   display: block;
   padding-left: 20px;
   list-style: none;
 }
-.Sidebar .Rooms .Room a {
+.Sidebar .ChatRooms .Rooms .Room a {
   display: block;
   padding: 10px 10px;
   text-decoration: none;
   color: #eee;
 }
-.Sidebar .Rooms .Room a:hover {
+.Sidebar .ChatRooms .Rooms .Room a:hover {
   background-color: #ffc0cb;
+}
+.Sidebar .UserSettings {
+  text-align: center;
+}
+.Sidebar .UserSettings .title {
+  color: #eee;
+  font-size: medium;
 }
 .Main {
   padding: 10px;

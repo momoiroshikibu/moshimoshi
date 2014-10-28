@@ -2,7 +2,7 @@ angular.module('moshimoshi.chat_directive', [
   'btford.socket-io'
 ])
 
-.directive 'chat', (webSocket) ->
+.directive 'chat', (webSocket, UserSettingsSharedService) ->
 
   activate = (scope, element, attr) ->
 
@@ -14,7 +14,7 @@ angular.module('moshimoshi.chat_directive', [
     scope.sendMessage = ->
       return unless scope.message
       webSocket.emit 'newMessage',
-        userName: scope.userName
+        userName: UserSettingsSharedService.userName.get()
         message:  scope.message
       scope.message = null
 

@@ -10,3 +10,18 @@ app.factory('webSocket', function(socketFactory) {
     ioSocket: io.connect("http://" + window.location.host)
   });
 });
+
+app.factory('UserSettingsSharedService', function() {
+  var userName;
+  userName = 'anonymous';
+  return {
+    userName: {
+      get: function() {
+        return userName;
+      },
+      set: function(newUserName) {
+        return userName = newUserName;
+      }
+    }
+  };
+});

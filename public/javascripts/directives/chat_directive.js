@@ -1,4 +1,4 @@
-angular.module('moshimoshi.chat_directive', ['btford.socket-io']).directive('chat', function(webSocket) {
+angular.module('moshimoshi.chat_directive', ['btford.socket-io']).directive('chat', function(webSocket, UserSettingsSharedService) {
   var activate;
   activate = function(scope, element, attr) {
     scope.messages = [];
@@ -10,7 +10,7 @@ angular.module('moshimoshi.chat_directive', ['btford.socket-io']).directive('cha
         return;
       }
       webSocket.emit('newMessage', {
-        userName: scope.userName,
+        userName: UserSettingsSharedService.userName.get(),
         message: scope.message
       });
       return scope.message = null;

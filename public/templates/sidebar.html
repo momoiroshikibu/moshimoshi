@@ -1,12 +1,26 @@
 <div class="Sidebar">
   <h1 class="title">MoshiMoshi</h1>
 
-  <ul class="Rooms" ng-repeat="room in rooms">
-    <li class="Room">
-      <a href="#rooms/{{room.id}}">
-        {{room.title}}
-      </a>
-    </li>
-  </ul>
+
+  <div class="ChatRooms">
+    <h3 class="title">Rooms</h3>
+    <ul class="Rooms" ng-repeat="room in rooms">
+      <li class="Room">
+        <a href="#rooms/{{room.id}}">
+          {{room.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="UserSettings">
+    <h3 class="title">User Settings</h3>
+    <form class="pure-form">
+      <input type="text"
+             ng-model="userName"
+             ng-change="changeUserName()"
+             class="pure-input-2-3">
+    </form>
+  </div>
 
 </div>

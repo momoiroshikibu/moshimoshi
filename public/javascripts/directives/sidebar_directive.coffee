@@ -2,9 +2,15 @@ angular.module('moshimoshi.sidebar_directive', [
   'btford.socket-io'
 ])
 
-.directive 'sidebar', (webSocket) ->
+.directive 'sidebar', (webSocket, UserSettingsSharedService) ->
 
   activate = (scope, element, attr) ->
+
+    scope.userName = UserSettingsSharedService.userName.get()
+
+    scope.changeUserName = () ->
+      UserSettingsSharedService.userName.set(scope.userName)
+      console.log UserSettingsSharedService.userName.get()
 
     # currently do nothing
     scope.rooms = [

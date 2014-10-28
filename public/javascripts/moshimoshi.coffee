@@ -26,3 +26,12 @@ app.factory 'webSocket', (socketFactory) ->
     ioSocket: io.connect "http://#{window.location.host}"
   )
 
+app.factory 'UserSettingsSharedService', () ->
+  userName = 'anonymous'
+  return {
+    userName:
+      get: () ->
+        return userName
+      set: (newUserName) ->
+        userName = newUserName
+  }

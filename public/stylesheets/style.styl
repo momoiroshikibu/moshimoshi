@@ -22,22 +22,32 @@ body
     font-size: x-large
     text-align: center
 
-  .Rooms
-    margin: 0
-    padding: 0
+  .ChatRooms
+    .title
+      font-size: medium
+    .Rooms
+      margin: 0
+      padding: 0
 
-    .Room
-      display: block
-      padding-left: 20px
-      list-style: none
-
-      a
+      .Room
         display: block
-        padding: 10px 10px
-        text-decoration: none
-        color: #eee
-        &:hover
-          background-color: pink
+        padding-left: 20px
+        list-style: none
+
+        a
+          display: block
+          padding: 10px 10px
+          text-decoration: none
+          color: #eee
+          &:hover
+            background-color: pink
+
+
+  .UserSettings
+    text-align: center
+    .title
+      color: #eee
+      font-size: medium
 
 .Main
   padding: 10px
