@@ -1,13 +1,9 @@
 config  = require 'config'
 request = require 'request'
 
-
 elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
 
-
 module.exports = (socketio) ->
-
-  console.log socketio
 
   ## events
   socketio.on 'connection', (socket) ->
@@ -28,8 +24,7 @@ module.exports = (socketio) ->
         json: newMessage
 
       request options, (error, response, body) ->
-        console.log response, body
-
+        # do nothing
 
     socket.on 'searchMessages', (query) ->
       console.log 'searchMessages', query
