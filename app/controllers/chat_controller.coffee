@@ -1,9 +1,9 @@
 config  = require 'config'
 request = require 'request'
 
-elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
-
 module.exports = (socketio) ->
+
+  elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
 
   ## events
   socketio.on 'connection', (socket) ->
