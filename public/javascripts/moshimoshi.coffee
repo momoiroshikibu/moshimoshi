@@ -3,6 +3,8 @@ console.log 'moshimoshi'
 app = angular
 .module 'moshimoshiApp', [
   'ngRoute'
+  'moshimoshi.chats_controller'
+  'moshimoshi.rooms_controller'
   'moshimoshi.sidebar_directive'
   'moshimoshi.chat_directive'
   'moshimoshi.search_directive'
@@ -10,16 +12,19 @@ app = angular
 ]
 
 
-# app.config ['$routeProvider', '$locationProvider', '$parseProvider', ($routeProvider, $locationProvider, $parseProvider) ->
+app.config ['$routeProvider', '$locationProvider', '$parseProvider', ($routeProvider, $locationProvider, $parseProvider) ->
 
-#   $routeProvider
-#     .when '/',
-#       templateUrl: '/templates/chat.html'
-# #      controller: 'ChatController'
-#     .when '/search',
-#       templateUrl: '/templates/search.html'
-# #      controller: 'SearchController'
-# ]
+  $routeProvider
+    .when '/',
+      templateUrl: '/templates/chat.html'
+      controller: 'ChatsController'
+    .when '/rooms/:roomId',
+      templateUrl: '/templates/room.html'
+      controller: 'RoomsController'
+    .when '/search',
+      templateUrl: '/templates/search.html'
+#      controller: 'SearchController'
+]
 
 app.factory 'webSocket', (socketFactory) ->
   socket = socketFactory(

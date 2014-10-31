@@ -1,10 +1,7 @@
 ## routings
 module.exports = (app, db) ->
 
-  # index
-  app.get '/', (req, res) ->
-    res.render 'index'
-
+  # get room data
   app.get '/rooms/:room_id', (req, res) ->
     console.log req.params
     console.log res

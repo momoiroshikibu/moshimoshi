@@ -1,20 +1,26 @@
 config  = require 'config'
 request = require 'request'
-Datastore    = require 'nedb'
 
 
-db = new Datastore
-  filename: './database/moshimoshi.db'
-  autoload: true
-db.loadDatabase (error) ->
-  console.log error
-
-
-module.exports = (socketio) ->
+## routings
+module.exports = (app, db, socketio) ->
 
   elasticSearchBaseUrl = "http://#{config.ElasticSearch.host}:#{config.ElasticSearch.port}"
 
-  ## events
+
+  # get room data
+  app.get '/messages', (req, res) ->
+    console.log req.query
+
+    query =
+#      roomId: req.query
+    db.find query, (error, docs) ->
+      console.log arguments
+      res.send docs
+
+
+
+  ## chatting events
   socketio.on 'connection', (socket) ->
 
     socket.on 'newMessage', (data) ->

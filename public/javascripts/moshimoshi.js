@@ -2,7 +2,21 @@ var app;
 
 console.log('moshimoshi');
 
-app = angular.module('moshimoshiApp', ['ngRoute', 'moshimoshi.sidebar_directive', 'moshimoshi.chat_directive', 'moshimoshi.search_directive', 'btford.socket-io']);
+app = angular.module('moshimoshiApp', ['ngRoute', 'moshimoshi.chats_controller', 'moshimoshi.rooms_controller', 'moshimoshi.sidebar_directive', 'moshimoshi.chat_directive', 'moshimoshi.search_directive', 'btford.socket-io']);
+
+app.config([
+  '$routeProvider', '$locationProvider', '$parseProvider', function($routeProvider, $locationProvider, $parseProvider) {
+    return $routeProvider.when('/', {
+      templateUrl: '/templates/chat.html',
+      controller: 'ChatsController'
+    }).when('/rooms/:roomId', {
+      templateUrl: '/templates/room.html',
+      controller: 'RoomsController'
+    }).when('/search', {
+      templateUrl: '/templates/search.html'
+    });
+  }
+]);
 
 app.factory('webSocket', function(socketFactory) {
   var socket;

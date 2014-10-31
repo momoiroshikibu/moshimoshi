@@ -1,26 +1,7 @@
-angular.module('moshimoshi.chat_directive', ['btford.socket-io']).directive('chat', function(webSocket, UserSettingsSharedService) {
-  var activate;
-  activate = function(scope, element, attr) {
-    scope.messages = [];
-    webSocket.on('updateMessages', function(message) {
-      return scope.messages.push(message);
-    });
-    return scope.sendMessage = function() {
-      if (!scope.message) {
-        return;
-      }
-      webSocket.emit('newMessage', {
-        userName: UserSettingsSharedService.userName.get(),
-        message: scope.message
-      });
-      return scope.message = null;
-    };
-  };
+angular.module('moshimoshi.chat_directive', []).directive('chat', function(webSocket, UserSettingsSharedService) {
   return {
-    link: activate,
     replace: false,
     restrict: 'E',
-    scope: {},
     templateUrl: '/templates/chat.html'
   };
 });

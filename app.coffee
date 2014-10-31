@@ -1,8 +1,9 @@
-express      = require 'express'
-logger       = require 'morgan'
-http         = require 'http'
-socketio     = require 'socket.io'
-assets       = require './config/assets'
+express   = require 'express'
+logger    = require 'morgan'
+http      = require 'http'
+socketio  = require 'socket.io'
+assets    = require './config/assets'
+Datastore = require 'nedb'
 
 # server settings
 app    = express()
@@ -12,13 +13,23 @@ io     = socketio server
 ## assets
 assets app
 
+## database
+db = new Datastore
+  filename: './database/moshimoshi.db'
+  autoload: true
+db.loadDatabase (error) ->
+  console.log error
+
+
 ## routings
 router = require './app/router'
-router app
+router app, db
 
-# WebSocket for chatting
-chatController = require './app/controllers/chat_controller'
-chatController io
+
+## messages
+messages = require './app/controllers/messages_controller'
+messages app, db, io
+
 
 # run server
 server.listen 3000
