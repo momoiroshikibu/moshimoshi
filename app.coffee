@@ -4,6 +4,7 @@ http      = require 'http'
 socketio  = require 'socket.io'
 assets    = require './config/assets'
 Datastore = require 'nedb'
+bodyParser = require 'body-parser'
 
 # server settings
 app    = express()
@@ -12,6 +13,8 @@ io     = socketio server
 
 ## assets
 assets app
+
+app.use bodyParser.json()
 
 ## database
 db = new Datastore

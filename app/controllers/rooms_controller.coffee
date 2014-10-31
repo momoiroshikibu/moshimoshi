@@ -11,6 +11,12 @@ module.exports = (app, db) ->
         id: 2
         title: 'bye'
     ]
+#   TODO
+#     query =
+#     db.find query, (error, rooms) ->
+#       res.send rooms
+
+
 
 
   # get room
@@ -25,3 +31,11 @@ module.exports = (app, db) ->
       res.send docs
 
 
+  # create room
+  app.post '/rooms', (req, res) ->
+    console.log req.body
+
+    room =
+      title: req.body.title
+    db.insert room, (error, newRoom) ->
+      res.send newRoom

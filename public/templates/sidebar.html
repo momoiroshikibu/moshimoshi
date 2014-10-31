@@ -11,7 +11,20 @@
         </a>
       </li>
     </ul>
+
+    <button ng-hide="isShowRoomForm"
+            ng-click="toggleRoomForm()">
+      {{toggleButtonTitle}}
+    </button>
+    <form ng-show="isShowRoomForm"
+          ng-submit="saveNewRoom()">
+      <input type="text"
+             ng-model="newRoom.title">
+      <button>OK</button><button ng-click="cancelNewRoom()">Cancel</button>
+    </form>
+
   </div>
+
 
   <div class="UserSettings">
     <h3 class="title">User Settings</h3>

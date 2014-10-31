@@ -10,16 +10,32 @@ angular.module('moshimoshi.sidebar_directive', [
 
     scope.changeUserName = () ->
       UserSettingsSharedService.userName.set(scope.userName)
-      console.log UserSettingsSharedService.userName.get()
 
-    # currently do nothing
+    # TODO: needs refactoring...
+    scope.toggleButtonTitle = 'add room'
+    scope.toggleRoomForm = () ->
+      scope.isShowRoomForm = !scope.isShowRoomForm
+      scope.toggleButtonTitle = if scope.isShowRoomForm then 'cancel' else 'add room'
+
+    scope.cancelNewRoom = () ->
+      scope.toggleRoomForm()
+      scope.toggleButtonTitle = 'add room'
+      newRoom.title = null
+
+    scope.saveNewRoom = () ->
+      $http.post './rooms',
+        title: scope.newRoom.title
+      .success (data, status, headers, config) ->
+        getRooms()
+
+    # get rooms
     scope.rooms = []
-    $http.get './rooms'
-    .success (data, status, headers, config) ->
-      console.log arguments
-      scope.rooms = data
-    .error (data, status, headers, config) ->
-      console.log arguments
+    getRooms = () ->
+      $http.get './rooms'
+      .success (data, status, headers, config) ->
+        scope.rooms = data
+        console.log scope.rooms
+    getRooms()
 
   return {
     link:        activate
