@@ -7,11 +7,11 @@ app = angular.module('moshimoshiApp', ['ngRoute', 'moshimoshi.chats_controller',
 app.config([
   '$routeProvider', '$locationProvider', '$parseProvider', function($routeProvider, $locationProvider, $parseProvider) {
     return $routeProvider.when('/', {
-      templateUrl: '/templates/chat.html',
-      controller: 'ChatsController'
+      templateUrl: '/templates/chat.html'
     }).when('/rooms/:roomId', {
       templateUrl: '/templates/room.html',
-      controller: 'RoomsController'
+      controller: 'RoomsController',
+      controllerAs: 'Rooms'
     }).when('/search', {
       templateUrl: '/templates/search.html'
     });

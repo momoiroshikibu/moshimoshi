@@ -17,10 +17,13 @@ app.config ['$routeProvider', '$locationProvider', '$parseProvider', ($routeProv
   $routeProvider
     .when '/',
       templateUrl: '/templates/chat.html'
-      controller: 'ChatsController'
+#      controllerAs: 'ChatsController'
+
     .when '/rooms/:roomId',
       templateUrl: '/templates/room.html'
       controller: 'RoomsController'
+      controllerAs: 'Rooms'
+
     .when '/search',
       templateUrl: '/templates/search.html'
 #      controller: 'SearchController'

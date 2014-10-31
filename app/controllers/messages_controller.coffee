@@ -10,12 +10,9 @@ module.exports = (app, db, socketio) ->
 
   # get room data
   app.get '/messages', (req, res) ->
-    console.log req.query
-
     query =
-#      roomId: req.query
+      roomId: req.query.roomId
     db.find query, (error, docs) ->
-      console.log arguments
       res.send docs
 
 
@@ -31,22 +28,25 @@ module.exports = (app, db, socketio) ->
         message:  data.message
         time:     Date.now()
 
-      # save to database
-      db.insert newMessage, (error, newDoc) ->
-        newMessage = newDoc
+      query =
+        roomId: data.roomId
+      db.find query, (error, room) ->
 
-      # emit event to clients
-      socketio.sockets.emit 'updateMessages',
-        newMessage
+        # save to database
+        db.insert newMessage, (error, newDoc) ->
+          newMessage = newDoc
 
-      # add to Elastic Search index
-      options =
-        uri: "#{elasticSearchBaseUrl}/moshimoshi/#{newMessage._id}"
-        method: 'POST'
-        json: newMessage
+          # emit event to clients
+          socketio.sockets.emit 'updateMessages', newMessage
 
-      request options, (error, response, body) ->
-        # do nothing
+          # add to Elastic Search index
+          options =
+            uri: "#{elasticSearchBaseUrl}/moshimoshi/#{newMessage._id}"
+            method: 'POST'
+            json: newMessage
+
+          request options, (error, response, body) ->
+            # do nothing
 
 
     socket.on 'searchMessages', (query) ->

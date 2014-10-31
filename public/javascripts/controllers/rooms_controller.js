@@ -1,9 +1,12 @@
-angular.module('moshimoshi.rooms_controller', []).controller('RoomsController', function($http, $scope) {
-  $scope.title = 'hello';
-  $scope.rooms = [];
-  return $http.get('./rooms').success(function(data, status, headers, config) {
-    return $scope.rooms = data;
-  }).error(function(data, status, headers, config) {
+angular.module('moshimoshi.rooms_controller', []).controller('RoomsController', function($http, $routeParams, $scope) {
+  $scope.messages = [];
+  console.log($routeParams.roomId);
+  return $http.get('./messages', {
+    params: {
+      roomId: $routeParams.roomId
+    }
+  }).success(function(data, status, headers, config) {
+    $scope.messages = data;
     return console.log(arguments);
   });
 });

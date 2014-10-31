@@ -1,14 +1,11 @@
-This is room
-
-{{title}}
-
-
 <div>
+  This is room
 
-<div ng-repeat="message in messages">
+  <div ng-repeat="message in messages">
 
-<span>{{message.userName}}</span> : <span>{{message.message}}</span>({{message.time | date}})
+    <span>{{message.userName}}</span> : <span>{{message.message}}</span>({{message.time | date}})
 
-</div>
+  </div>
 
+  <chat></chat>
 </div>
