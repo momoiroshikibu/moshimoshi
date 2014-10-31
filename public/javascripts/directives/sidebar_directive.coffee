@@ -2,7 +2,7 @@ angular.module('moshimoshi.sidebar_directive', [
   'btford.socket-io'
 ])
 
-.directive 'sidebar', (webSocket, UserSettingsSharedService) ->
+.directive 'sidebar', ($http, webSocket, UserSettingsSharedService) ->
 
   activate = (scope, element, attr) ->
 
@@ -13,16 +13,13 @@ angular.module('moshimoshi.sidebar_directive', [
       console.log UserSettingsSharedService.userName.get()
 
     # currently do nothing
-    scope.rooms = [
-      {
-        id:    1
-        title: 'momoiroshikibu'
-      },
-      {
-        id:    2
-        title: 'hello'
-      }
-    ]
+    scope.rooms = []
+    $http.get './rooms'
+    .success (data, status, headers, config) ->
+      console.log arguments
+      scope.rooms = data
+    .error (data, status, headers, config) ->
+      console.log arguments
 
   return {
     link:        activate

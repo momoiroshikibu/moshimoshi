@@ -30,6 +30,9 @@ router app, db
 messages = require './app/controllers/messages_controller'
 messages app, db, io
 
+## rooms
+rooms = require './app/controllers/rooms_controller'
+rooms app, db
 
 # run server
 server.listen 3000
