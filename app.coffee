@@ -1,9 +1,9 @@
-express   = require 'express'
-logger    = require 'morgan'
-http      = require 'http'
-socketio  = require 'socket.io'
-assets    = require './config/assets'
-Datastore = require 'nedb'
+express    = require 'express'
+logger     = require 'morgan'
+http       = require 'http'
+socketio   = require 'socket.io'
+assets     = require './config/assets'
+Datastore  = require 'nedb'
 bodyParser = require 'body-parser'
 
 # server settings
