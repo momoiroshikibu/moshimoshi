@@ -2,7 +2,6 @@ angular.module('moshimoshi.chat_directive', ['moshimoshi.chats_controller']).dir
   return {
     replace: false,
     restrict: 'E',
-    scope: true,
     controller: 'ChatsController',
     templateUrl: '/templates/chat.html'
   };

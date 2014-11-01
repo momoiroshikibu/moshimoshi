@@ -2,7 +2,7 @@ angular.module('moshimoshi.chats_controller', []).controller('ChatsController', 
   console.log('chat controller');
   $scope.messages = [];
   webSocket.on('updateMessages', function(message) {
-    return $scope.Rooms.messages.push(message);
+    return $scope.messages.push(message);
   });
   return $scope.sendMessage = function() {
     if (!$scope.message) {

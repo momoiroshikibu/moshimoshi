@@ -8,7 +8,7 @@ angular.module 'moshimoshi.chats_controller', [
   $scope.messages = []
 
   webSocket.on 'updateMessages', (message) ->
-    $scope.Rooms.messages.push message
+    $scope.messages.push message
 
   $scope.sendMessage = ->
     return unless $scope.message
