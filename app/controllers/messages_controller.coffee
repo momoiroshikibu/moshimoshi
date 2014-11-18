@@ -24,6 +24,7 @@ module.exports = (app, db, socketio) ->
 
       # new message
       newMessage =
+        roomId: data.roomId
         userName: data.userName
         message:  data.message
         time:     Date.now()

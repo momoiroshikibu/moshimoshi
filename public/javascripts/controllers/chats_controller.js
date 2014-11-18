@@ -8,6 +8,7 @@ angular.module('moshimoshi.chats_controller', []).controller('ChatsController', 
     if (!$scope.message) {
       return;
     }
+    console.warn($routeParams.roomId);
     webSocket.emit('newMessage', {
       roomId: $routeParams.roomId,
       userName: UserSettingsSharedService.userName.get(),

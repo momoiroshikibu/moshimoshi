@@ -12,6 +12,7 @@ angular.module 'moshimoshi.chats_controller', [
 
   $scope.sendMessage = ->
     return unless $scope.message
+    console.warn $routeParams.roomId
     webSocket.emit 'newMessage',
       roomId:   $routeParams.roomId
       userName: UserSettingsSharedService.userName.get()

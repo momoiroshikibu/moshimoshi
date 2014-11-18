@@ -3,20 +3,9 @@ module.exports = (app, db) ->
 
   # get rooms
   app.get '/rooms', (req, res) ->
-    # TODO
-    res.send [
-        id: 1
-        title: 'hello'
-      ,
-        id: 2
-        title: 'bye'
-    ]
-#   TODO
-#     query =
-#     db.find query, (error, rooms) ->
-#       res.send rooms
-
-
+    query = null
+    db.find query, (error, rooms) ->
+      res.send rooms
 
 
   # get room
